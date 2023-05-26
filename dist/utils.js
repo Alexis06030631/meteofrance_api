@@ -64,9 +64,14 @@ exports.getConfig = getConfig;
 function updateConfig(key, value) {
     const config = JSON.parse(fs.readFileSync(path_1.default.join(__dirname, "./config.json"), "utf8"));
     config[key] = value;
-    fs.writeFileSync(path_1.default.join(__dirname, "./config.json"), JSON.stringify(config));
-    if (process.env["dev_module"])
-        fs.writeFileSync(path_1.default.join(__dirname, "../src/config.json"), JSON.stringify(config, null, 4));
+    try {
+        fs.writeFileSync(path_1.default.join(__dirname, "./config.json"), JSON.stringify(config));
+        if (process.env["dev_module"])
+            fs.writeFileSync(path_1.default.join(__dirname, "../src/config.json"), JSON.stringify(config, null, 4));
+    }
+    catch (e) {
+        process.stderr.write(`Error while updating config.json: ${e.message}`);
+    }
 }
 exports.updateConfig = updateConfig;
 function makeRequest(url, options, fullUrl) {

@@ -26,8 +26,12 @@ function getConfig(key?: string) {
 function updateConfig(key: string, value: any) {
     const config = JSON.parse(fs.readFileSync(path.join(__dirname, "./config.json"), "utf8"));
     config[key] = value;
-    fs.writeFileSync(path.join(__dirname, "./config.json"), JSON.stringify(config));
-    if(process.env["dev_module"]) fs.writeFileSync(path.join(__dirname, "../src/config.json"), JSON.stringify(config, null, 4));
+    try{
+        fs.writeFileSync(path.join(__dirname, "./config.json"), JSON.stringify(config));
+        if(process.env["dev_module"]) fs.writeFileSync(path.join(__dirname, "../src/config.json"), JSON.stringify(config, null, 4));
+    }catch (e) {
+        process.stderr.write(`Error while updating config.json: ${e.message}`);
+    }
 }
 
 function makeRequest(url: string, options?: AxiosRequestConfig, fullUrl?: boolean) {
