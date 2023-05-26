@@ -32,7 +32,7 @@ function getWeather(place: number | string): Promise<models.Weather> {
         const isPlaceId = typeof place === "number"? true: place.match(/^[0-9]+$/) !== null;
         const placeID = isPlaceId? place: (await getPlace(`${place}`))[0].id;
 
-        if(!isPlaceId) reject(new Error("Place not found"));
+        if(!placeID) reject(new Error("Place not found"));
 
         makeRequest(`/forecast?id=${placeID}&day=0`).then((res) => {
             return resolve(new models.Weather(res.data));

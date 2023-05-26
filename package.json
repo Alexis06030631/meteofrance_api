@@ -1,6 +1,6 @@
 {
 	"name": "meteofrance_api",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "A simple API to get weather data from Meteo France",
 	"scripts": {
 		"test": "nodemon test.js",

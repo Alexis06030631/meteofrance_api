@@ -65,7 +65,7 @@ function getWeather(place) {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         const isPlaceId = typeof place === "number" ? true : place.match(/^[0-9]+$/) !== null;
         const placeID = isPlaceId ? place : (yield getPlace(`${place}`))[0].id;
-        if (!isPlaceId)
+        if (!placeID)
             reject(new Error("Place not found"));
         (0, utils_1.makeRequest)(`/forecast?id=${placeID}&day=0`).then((res) => {
             return resolve(new models.Weather(res.data));
