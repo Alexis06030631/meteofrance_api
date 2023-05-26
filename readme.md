@@ -32,7 +32,7 @@ const {getPlace} = require('meteofrance_api')
 getPlace('Paris').then(console.log)
 ```
 
-### getWeater
+### getWeather
 
 Use this method to get information about the weather of a place.
 

@@ -1,5 +1,5 @@
 /**
- * @typedef {Object} MeteoErrorCodes
+ * @typedef {Object} WeatherErrorCodes
 
  * @property {'UnknownID'} UnknownID
  *

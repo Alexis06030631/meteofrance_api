@@ -18,7 +18,7 @@ const utils_1 = require("./utils");
 const config_json_1 = require("./config.json");
 function getToken() {
     return __awaiter(this, void 0, void 0, function* () {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
             if (yield requireNewToken()) {
                 axios_1.default.get('https://meteofrance.com').then((res) => {
                     const newToken = decodeURIComponent((res.headers["set-cookie"][0].match(new RegExp("(^| )mfsession=([^;]+)")))[2].replace(/[a-zA-Z]/g, function (e) {

@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import path from "path";
-import axios, {AxiosInterceptorOptions} from "axios";
+import axios from "axios";
 import {getToken} from "./token";
 import {AxiosRequestConfig} from "axios/index";
 import {makeAxiosError} from "./errors";

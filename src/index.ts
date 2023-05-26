@@ -10,7 +10,7 @@ import {makeAxiosError} from "./errors";
  * getPlace("Paris").then(console.log)
  */
 function getPlace(place:string): Promise<Array<models.Place>>{
-    return new Promise<Array<models.Place>>(async (resolve, reject) => {
+    return new Promise<Array<models.Place>>(async (resolve) => {
         makeRequest(`https://meteofrance.com/search/all?term=${place}`, {}, true).then((res) => {
             const places: Array<models.Place> = [];
             res.data.forEach((place: any) => {

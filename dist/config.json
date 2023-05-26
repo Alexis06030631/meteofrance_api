@@ -1,1 +1,5 @@
-{"token":"eyJjbGFzcyI6ImludGVybmV0IiwiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifQ.eyJqdGkiOiI3OTk5ZGI1NDFkY2FiYWNiYWIwOTgxNzk1NDExNzM1YSIsImlhdCI6MTY4NTEyNDI5MX0.bhjSVkvPXYrRXvVp33nnLP0R9VmScNm4yQtsopkYPZc","tokenTime":1685124291188,"defaultApi":"https://rpcache-aa.meteofrance.com/internet2018client/2.0/"}
+{
+    "token": "eyJjbGFzcyI6ImludGVybmV0IiwiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifQ.eyJqdGkiOiI3OTk5ZGI1NDFkY2FiYWNiYWIwOTgxNzk1NDExNzM1YSIsImlhdCI6MTY4NTEyNDI5MX0.bhjSVkvPXYrRXvVp33nnLP0R9VmScNm4yQtsopkYPZc",
+    "tokenTime": 1685124291188,
+    "defaultApi": "https://rpcache-aa.meteofrance.com/internet2018client/2.0/"
+}

@@ -3,7 +3,7 @@ import { getConfig, updateConfig } from "./utils";
 import { defaultApi } from "./config.json";
 
 async function getToken() {
-    return new Promise<string>(async (resolve, reject) => {
+    return new Promise<string>(async (resolve) => {
         if (await requireNewToken()) {
             axios.get('https://meteofrance.com').then((res) => {
                 const newToken = decodeURIComponent((res.headers["set-cookie"][0].match(new RegExp("(^| )mfsession=([^;]+)")))[2].replace(/[a-zA-Z]/g, function (e) {

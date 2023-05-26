@@ -44,7 +44,7 @@ const errors_1 = require("./errors");
  * getPlace("Paris").then(console.log)
  */
 function getPlace(place) {
-    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+    return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
         (0, utils_1.makeRequest)(`https://meteofrance.com/search/all?term=${place}`, {}, true).then((res) => {
             const places = [];
             res.data.forEach((place) => {
