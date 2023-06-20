@@ -3,7 +3,7 @@ import path from "path";
 import axios from "axios";
 import {getToken} from "./token";
 import {AxiosRequestConfig} from "axios/index";
-import {makeAxiosError} from "./errors";
+import {makeWeatherError, makeAxiosError} from "./errors";
 
 /**
  * Get config from config.json
@@ -42,10 +42,16 @@ function makeRequest(url: string, options?: AxiosRequestConfig, fullUrl?: boolea
         axios.get(encodeURI(`${!fullUrl? getConfig('defaultApi') + `/${url}`: `${url}`}`), options).then((res: any) => {
             resolve(res);
         }).catch((err: any) => {
-            reject(makeAxiosError(err.response.statusText.replace(/\s/g, ""), err?.response?.data?.message));
+            if(err?.response?.statusText){
+                reject(makeWeatherError(err.response.statusText.replace(/\s/g, ""), err?.response?.data?.message));
+            }else reject(makeAxiosError(err.code, err.message))
         })
     })
 }
 
+function makeIcon(icon: string) {
+    return `https://meteofrance.com/modules/custom/mf_tools_common_theme_public/svg/weather/${icon}.svg`;
+}
 
-export {getConfig, updateConfig, makeRequest};
+
+export {getConfig, updateConfig, makeRequest, makeIcon};

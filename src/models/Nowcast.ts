@@ -1,12 +1,14 @@
 export class Nowcast {
-    update: Date;
+    last_update: Date;
     type: string;
     properties: Properties;
+    forecast: Forecast[];
 
     constructor(response: respWeather) {
-        this.update = new Date(response["update_time"]);
         this.type = response["type"];
         this.properties = new Properties(response["properties"]);
+        this.forecast = response["properties"]["forecast"].map((e) => new Forecast(e));
+        this.last_update = new Date(response["update_time"]);
     }
 }
 
@@ -29,7 +31,6 @@ class Properties {
     rain_product_available: boolean;
     timezone: string;
     confidence: number;
-    forecast: Forecast[];
     constructor(responseElement: respProperties) {
         this.altitude = responseElement["altitude"];
         this.name = responseElement["name"];
@@ -38,7 +39,6 @@ class Properties {
         this.rain_product_available = !!responseElement["rain_product_available"];
         this.timezone = responseElement["timezone"];
         this.confidence = responseElement["confidence"];
-        this.forecast = responseElement["forecast"].map((e) => new Forecast(e));
     }
 }
 

@@ -10,5 +10,6 @@ declare const _default: {
     UnrecognizedError: string;
     PlaceNotFound: string;
     BadRequest: string;
+    ECONNRESET: string;
 };
 export default _default;

@@ -1,17 +1,28 @@
+import {makeIcon} from "../utils";
+
 export class Weather {
-    update: Date;
     type: string;
     properties: Properties;
+    daily_forecast: DailyForecast;
+    last_update: Date;
+    nowcast: Forecast;
+    forecast: Forecast[];
+    probability_forecast: ProbabilityForecast[];
 
     constructor(response: respWeather) {
-        this.update = new Date(response["update_time"]);
         this.type = response["type"];
         this.properties = new Properties(response["properties"]);
+
+        this.daily_forecast = response["properties"]["daily_forecast"].map((e) => new DailyForecast(e))[0];
+        this.nowcast = response["properties"]["forecast"].filter((e) => new Date(e["time"]).getTime() <= new Date().getTime()).map((e) => new Forecast(e)).pop();
+        this.forecast = response["properties"]["forecast"].map((e) => new Forecast(e));
+        this.probability_forecast = response["properties"]["probability_forecast"].map((e) => new ProbabilityForecast(e));
+        this.last_update = new Date(response["update_time"]);
     }
 }
 
 class DailyForecast {
-    time: Date;
+    date: string;
     T_min: number;
     T_max: number;
     T_sea: number;
@@ -25,7 +36,7 @@ class DailyForecast {
     sunset_time: Date;
 
     constructor(e: respDailyForecast) {
-        this.time = new Date(e["time"]);
+        this.date = new Date(e["time"]).toISOString().split('T')[0];
         this.T_min = e["T_min"];
         this.T_max = e["T_max"];
         this.T_sea = e["T_sea"];
@@ -33,7 +44,7 @@ class DailyForecast {
         this.relative_humidity_max = e["relative_humidity_max"];
         this.total_precipitation_24h = e["total_precipitation_24h"];
         this.uv_index = e["uv_index"];
-        this.daily_weather_icon = e["daily_weather_icon"];
+        this.daily_weather_icon = makeIcon(e["daily_weather_icon"]);
         this.daily_weather_description = e["daily_weather_description"];
         this.sunrise_time = new Date(e["sunrise_time"]);
         this.sunset_time = new Date(e["sunset_time"]);
@@ -47,6 +58,7 @@ class Forecast {
     T_windchill: number;
     relative_humidity: number;
     P_sea: number;
+    wind_icon: string;
     wind_speed: number;
     wind_speed_gust: number;
     wind_direction: number;
@@ -67,6 +79,7 @@ class Forecast {
     iso0: number;
     rain_snow_limit: number;
     total_cloud_cover: number;
+    weather_icon: string;
     weather_description: string;
 
     constructor(e: respForecast) {
@@ -75,6 +88,7 @@ class Forecast {
         this.T_windchill = e["T_windchill"];
         this.relative_humidity = e["relative_humidity"];
         this.P_sea = e["P_sea"];
+        this.wind_icon = makeIcon(e["wind_icon"]);
         this.wind_speed = e["wind_speed"];
         this.wind_speed_gust = e["wind_speed_gust"];
         this.wind_direction = e["wind_direction"];
@@ -95,6 +109,7 @@ class Forecast {
         this.iso0 = e["iso0"];
         this.rain_snow_limit = e["rain_snow_limit"];
         this.total_cloud_cover = e["total_cloud_cover"];
+        this.weather_icon = makeIcon(e["weather_icon"]);
         this.weather_description = e["weather_description"];
     }
 }
@@ -136,9 +151,6 @@ class Properties {
     timezone: string;
     insee: number;
     bulletin_cote: number;
-    daily_forecast: DailyForecast[];
-    forecast: Forecast[];
-    probability_forecast: ProbabilityForecast[];
     constructor(responseElement: respProperties) {
         this.altitude = responseElement["altitude"];
         this.name = responseElement["name"];
@@ -148,9 +160,6 @@ class Properties {
         this.timezone = responseElement["timezone"];
         this.insee = Number(responseElement["insee"]);
         this.bulletin_cote = responseElement["bulletin_cote"];
-        this.daily_forecast = responseElement["daily_forecast"].map((e) => new DailyForecast(e));
-        this.forecast = responseElement["forecast"].map((e) => new Forecast(e));
-        this.probability_forecast = responseElement["probability_forecast"].map((e) => new ProbabilityForecast(e));
     }
 }
 

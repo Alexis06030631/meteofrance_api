@@ -1,11 +1,15 @@
 export declare class Weather {
-    update: Date;
     type: string;
     properties: Properties;
+    daily_forecast: DailyForecast;
+    last_update: Date;
+    nowcast: Forecast;
+    forecast: Forecast[];
+    probability_forecast: ProbabilityForecast[];
     constructor(response: respWeather);
 }
 declare class DailyForecast {
-    time: Date;
+    date: string;
     T_min: number;
     T_max: number;
     T_sea: number;
@@ -25,6 +29,7 @@ declare class Forecast {
     T_windchill: number;
     relative_humidity: number;
     P_sea: number;
+    wind_icon: string;
     wind_speed: number;
     wind_speed_gust: number;
     wind_direction: number;
@@ -45,6 +50,7 @@ declare class Forecast {
     iso0: number;
     rain_snow_limit: number;
     total_cloud_cover: number;
+    weather_icon: string;
     weather_description: string;
     constructor(e: respForecast);
 }
@@ -71,9 +77,6 @@ declare class Properties {
     timezone: string;
     insee: number;
     bulletin_cote: number;
-    daily_forecast: DailyForecast[];
-    forecast: Forecast[];
-    probability_forecast: ProbabilityForecast[];
     constructor(responseElement: respProperties);
 }
 declare class respWeather {

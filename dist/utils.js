@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.makeRequest = exports.updateConfig = exports.getConfig = void 0;
+exports.makeIcon = exports.makeRequest = exports.updateConfig = exports.getConfig = void 0;
 const fs = __importStar(require("fs"));
 const path_1 = __importDefault(require("path"));
 const axios_1 = __importDefault(require("axios"));
@@ -84,9 +84,17 @@ function makeRequest(url, options, fullUrl) {
         axios_1.default.get(encodeURI(`${!fullUrl ? getConfig('defaultApi') + `/${url}` : `${url}`}`), options).then((res) => {
             resolve(res);
         }).catch((err) => {
-            var _a, _b;
-            reject((0, errors_1.makeAxiosError)(err.response.statusText.replace(/\s/g, ""), (_b = (_a = err === null || err === void 0 ? void 0 : err.response) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.message));
+            var _a, _b, _c;
+            if ((_a = err === null || err === void 0 ? void 0 : err.response) === null || _a === void 0 ? void 0 : _a.statusText) {
+                reject((0, errors_1.makeWeatherError)(err.response.statusText.replace(/\s/g, ""), (_c = (_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.message));
+            }
+            else
+                reject((0, errors_1.makeAxiosError)(err.code, err.message));
         });
     }));
 }
 exports.makeRequest = makeRequest;
+function makeIcon(icon) {
+    return `https://meteofrance.com/modules/custom/mf_tools_common_theme_public/svg/weather/${icon}.svg`;
+}
+exports.makeIcon = makeIcon;

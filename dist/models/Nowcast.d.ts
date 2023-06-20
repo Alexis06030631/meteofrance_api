@@ -1,7 +1,8 @@
 export declare class Nowcast {
-    update: Date;
+    last_update: Date;
     type: string;
     properties: Properties;
+    forecast: Forecast[];
     constructor(response: respWeather);
 }
 declare class Forecast {
@@ -18,7 +19,6 @@ declare class Properties {
     rain_product_available: boolean;
     timezone: string;
     confidence: number;
-    forecast: Forecast[];
     constructor(responseElement: respProperties);
 }
 declare class respWeather {

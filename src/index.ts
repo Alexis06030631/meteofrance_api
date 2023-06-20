@@ -1,6 +1,6 @@
 import {makeRequest} from "./utils";
 import * as models from "./models";
-import {makeAxiosError} from "./errors";
+import {makeWeatherError} from "./errors";
 
 /**
  * Get place from name
@@ -30,7 +30,7 @@ function getPlace(place:string): Promise<Array<models.Place>>{
 function getWeather(place: number | string): Promise<models.Weather> {
     return new Promise<models.Weather>(async (resolve, reject) => {
         const isPlaceId = typeof place === "number"? true: place.match(/^[0-9]+$/) !== null;
-        const placeID = isPlaceId? place: (await getPlace(`${place}`))[0].id;
+        const placeID = isPlaceId? place: (await getPlace(`${place}`))?.[0]?.id;
 
         if(!placeID) reject(new Error("Place not found"));
 
@@ -44,7 +44,7 @@ function getWeather(place: number | string): Promise<models.Weather> {
 function getNextRain(placeName: string): Promise<models.Nowcast> {
     return new Promise<models.Nowcast>(async (resolve, reject) => {
         const place = (await getPlace(`${placeName}`))?.[0]
-        if(!place?.id) reject(makeAxiosError("PlaceNotFound", placeName));
+        if(!place?.id) reject(makeWeatherError("PlaceNotFound", placeName));
 
         makeRequest(`/nowcast/rain?lat=${place.coords.lat}&lon=${place.coords.lon}`).then((res) => {
             return resolve(new models.Nowcast(res.data));

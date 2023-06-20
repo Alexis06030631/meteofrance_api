@@ -63,8 +63,9 @@ exports.getPlace = getPlace;
  */
 function getWeather(place) {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        var _a, _b;
         const isPlaceId = typeof place === "number" ? true : place.match(/^[0-9]+$/) !== null;
-        const placeID = isPlaceId ? place : (yield getPlace(`${place}`))[0].id;
+        const placeID = isPlaceId ? place : (_b = (_a = (yield getPlace(`${place}`))) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.id;
         if (!placeID)
             reject(new Error("Place not found"));
         (0, utils_1.makeRequest)(`/forecast?id=${placeID}&day=0`).then((res) => {
@@ -78,7 +79,7 @@ function getNextRain(placeName) {
         var _a;
         const place = (_a = (yield getPlace(`${placeName}`))) === null || _a === void 0 ? void 0 : _a[0];
         if (!(place === null || place === void 0 ? void 0 : place.id))
-            reject((0, errors_1.makeAxiosError)("PlaceNotFound", placeName));
+            reject((0, errors_1.makeWeatherError)("PlaceNotFound", placeName));
         (0, utils_1.makeRequest)(`/nowcast/rain?lat=${place.coords.lat}&lon=${place.coords.lon}`).then((res) => {
             return resolve(new models.Nowcast(res.data));
         });

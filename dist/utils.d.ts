@@ -13,4 +13,5 @@ declare function getConfig(key?: string): any;
  */
 declare function updateConfig(key: string, value: any): void;
 declare function makeRequest(url: string, options?: AxiosRequestConfig, fullUrl?: boolean): Promise<any>;
-export { getConfig, updateConfig, makeRequest };
+declare function makeIcon(icon: string): string;
+export { getConfig, updateConfig, makeRequest, makeIcon };

@@ -10,5 +10,6 @@ export default {
     UnknownID: 'UnknownID',
     UnrecognizedError: 'UnrecognizedError',
     PlaceNotFound: 'PlaceNotFound',
-    BadRequest: 'BadRequest'
+    BadRequest: 'BadRequest',
+    ECONNRESET: 'ECONNRESET'
 }

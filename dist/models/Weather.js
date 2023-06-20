@@ -1,17 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Weather = void 0;
+const utils_1 = require("../utils");
 class Weather {
     constructor(response) {
-        this.update = new Date(response["update_time"]);
         this.type = response["type"];
         this.properties = new Properties(response["properties"]);
+        this.daily_forecast = response["properties"]["daily_forecast"].map((e) => new DailyForecast(e))[0];
+        this.nowcast = response["properties"]["forecast"].filter((e) => new Date(e["time"]).getTime() <= new Date().getTime()).map((e) => new Forecast(e)).pop();
+        this.forecast = response["properties"]["forecast"].map((e) => new Forecast(e));
+        this.probability_forecast = response["properties"]["probability_forecast"].map((e) => new ProbabilityForecast(e));
+        this.last_update = new Date(response["update_time"]);
     }
 }
 exports.Weather = Weather;
 class DailyForecast {
     constructor(e) {
-        this.time = new Date(e["time"]);
+        this.date = new Date(e["time"]).toISOString().split('T')[0];
         this.T_min = e["T_min"];
         this.T_max = e["T_max"];
         this.T_sea = e["T_sea"];
@@ -19,7 +24,7 @@ class DailyForecast {
         this.relative_humidity_max = e["relative_humidity_max"];
         this.total_precipitation_24h = e["total_precipitation_24h"];
         this.uv_index = e["uv_index"];
-        this.daily_weather_icon = e["daily_weather_icon"];
+        this.daily_weather_icon = (0, utils_1.makeIcon)(e["daily_weather_icon"]);
         this.daily_weather_description = e["daily_weather_description"];
         this.sunrise_time = new Date(e["sunrise_time"]);
         this.sunset_time = new Date(e["sunset_time"]);
@@ -32,6 +37,7 @@ class Forecast {
         this.T_windchill = e["T_windchill"];
         this.relative_humidity = e["relative_humidity"];
         this.P_sea = e["P_sea"];
+        this.wind_icon = (0, utils_1.makeIcon)(e["wind_icon"]);
         this.wind_speed = e["wind_speed"];
         this.wind_speed_gust = e["wind_speed_gust"];
         this.wind_direction = e["wind_direction"];
@@ -52,6 +58,7 @@ class Forecast {
         this.iso0 = e["iso0"];
         this.rain_snow_limit = e["rain_snow_limit"];
         this.total_cloud_cover = e["total_cloud_cover"];
+        this.weather_icon = (0, utils_1.makeIcon)(e["weather_icon"]);
         this.weather_description = e["weather_description"];
     }
 }
@@ -80,9 +87,6 @@ class Properties {
         this.timezone = responseElement["timezone"];
         this.insee = Number(responseElement["insee"]);
         this.bulletin_cote = responseElement["bulletin_cote"];
-        this.daily_forecast = responseElement["daily_forecast"].map((e) => new DailyForecast(e));
-        this.forecast = responseElement["forecast"].map((e) => new Forecast(e));
-        this.probability_forecast = responseElement["probability_forecast"].map((e) => new ProbabilityForecast(e));
     }
 }
 class respWeather {

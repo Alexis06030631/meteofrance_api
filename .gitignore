@@ -2,3 +2,4 @@ node_modules/
 test.js
 .Ds_Store
 .idea/
+data.json
