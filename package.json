@@ -9,7 +9,7 @@
 		"build_auto": "nodemon --watch src --exec \"npm run build\"",
 		"docs:prep": "tsc && api-extractor run --local --verbose && api-documenter markdown --input-folder=./temp/ --output-folder=./docs-src/api && rm -rf ./temp",
 		"docs:dev": "npm run docs:prep && vitepress dev docs-src",
-		"docs:build": "yarn docs:prep && vitepress build docs-src"
+		"docs:build": "npm run docs:prep && vitepress build docs-src"
 	},
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
