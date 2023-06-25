@@ -1,3 +1,5 @@
+import {API_Place} from "../api_models";
+
 export class Place {
     alias: string;
     id: number;
@@ -7,7 +9,7 @@ export class Place {
     coords: { lon: number; lat: number };
     cp: number;
 
-    constructor(response: respPlace) {
+    constructor(response: API_Place) {
         this.alias = response["alias"];
         this.id = Number(response["id"]);
         this.insee = Number(response["insee"]);
@@ -19,15 +21,4 @@ export class Place {
         }
         this.cp = Number(response["cp"]);
     }
-}
-
-class respPlace {
-    alias: string;
-    id: number;
-    insee: number;
-    type: string;
-    real_name: string;
-    lat: number;
-    lng: number;
-    cp: number;
 }

@@ -1,69 +1,31 @@
+import { Forecast, Properties } from "../models";
+import { API_Nowcast } from "../api_models";
 export class Nowcast {
+    /**
+     * The time when the weather was last updated.
+     * @public
+     */
     last_update: Date;
+    /**
+     * The type of weather.
+     * @public
+     */
     type: string;
+    /**
+     * The properties of the city where the weather is being forecasted.
+     * @public
+     * @readonly
+     */
     properties: Properties;
+    /**
+     * The forecast for the next 12 hours.
+     */
     forecast: Forecast[];
 
-    constructor(response: respWeather) {
+    constructor(response: API_Nowcast) {
         this.type = response["type"];
         this.properties = new Properties(response["properties"]);
         this.forecast = response["properties"]["forecast"].map((e) => new Forecast(e));
         this.last_update = new Date(response["update_time"]);
     }
-}
-
-class Forecast {
-    time: Date;
-    rain_intensity: number;
-    rain_intensity_description: string;
-
-    constructor(e: respForecast) {
-        this.time = new Date(e["time"]);
-        this.rain_intensity = e["rain_intensity"];
-        this.rain_intensity_description = e["rain_intensity_description"];
-    }
-}
-class Properties {
-    altitude: number;
-    name: string;
-    country: string;
-    department: number;
-    rain_product_available: boolean;
-    timezone: string;
-    confidence: number;
-    constructor(responseElement: respProperties) {
-        this.altitude = responseElement["altitude"];
-        this.name = responseElement["name"];
-        this.country = responseElement["country"];
-        this.department = Number(responseElement["french_department"]);
-        this.rain_product_available = !!responseElement["rain_product_available"];
-        this.timezone = responseElement["timezone"];
-        this.confidence = responseElement["confidence"];
-    }
-}
-
-class respWeather {
-    update_time: string;
-    type: string;
-    geometry: respGeometry;
-    properties: respProperties;
-}
-class respGeometry {
-    type: string;
-    coordinates: Array<number>;
-}
-class respProperties {
-    altitude: number;
-    name: string;
-    country: string;
-    french_department: string;
-    rain_product_available: number;
-    timezone: string;
-    confidence: number;
-    forecast: Array<respForecast>;
-}
-class respForecast {
-    time: string;
-    rain_intensity: number;
-    rain_intensity_description: string;
 }

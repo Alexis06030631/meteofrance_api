@@ -7,10 +7,9 @@ import {makeWeatherError, makeAxiosError} from "./errors";
 
 /**
  * Get config from config.json
- * @param {string} key - Key of config
- * @returns {any} - Value of config
+ * @param key - Key of config
  */
-function getConfig(key?: string) {
+function getConfig(key?: string):any {
     const config = JSON.parse(fs.readFileSync(path.join(__dirname, "./config.json"), "utf8"));
     if(key) {
         return config[key];
@@ -19,9 +18,8 @@ function getConfig(key?: string) {
 
 /**
  * Update config.json with new value
- * @param {string} key - Key of config
- * @param {any} value - New value of config
- * @returns {void}
+ * @param key - Key of config
+ * @param value - New value of config
  */
 function updateConfig(key: string, value: any) {
     const config = JSON.parse(fs.readFileSync(path.join(__dirname, "./config.json"), "utf8"));
