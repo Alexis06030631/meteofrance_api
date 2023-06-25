@@ -6,10 +6,14 @@
 		"test": "nodemon test.js --watch test.js --watch dist",
 		"publish": "npm run build && npm publish --access public",
 		"build": "tsc",
-		"build_auto": "nodemon --watch src --exec \"npm run build\""
+		"build_auto": "nodemon --watch src --exec \"npm run build\"",
+		"docs:prep": "tsc && api-extractor run --local --verbose && api-documenter markdown --input-folder=./temp/ --output-folder=./docs-src/api && rm -rf ./temp",
+		"docs:dev": "npm run docs:prep && vitepress dev docs-src",
+		"docs:build": "yarn docs:prep && vitepress build docs-src"
 	},
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
+	"typings": "./dist/index.d.ts",
 	"keywords": [
 		"wheather",
 		"meteo",
@@ -40,7 +44,8 @@
 	"devDependencies": {
 		"@types/node": "^20.1.0",
 		"nodemon": "^2.0.22",
-		"typescript": "^5.0.4"
+		"typescript": "^5.0.4",
+		"vitepress": "^1.0.0-beta.3"
 	},
 	"release": {
 		"branches": [
