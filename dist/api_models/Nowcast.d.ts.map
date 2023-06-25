@@ -1,0 +1,1 @@
+{"version":3,"file":"Nowcast.d.ts","sourceRoot":"","sources":["../../src/api_models/Nowcast.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,YAAY,EAAE,cAAc,EAAC,MAAM,IAAI,CAAC;AAEhD,qBAAa,WAAW;IACpB,WAAW,EAAE,MAAM,CAAC;IACpB,IAAI,EAAE,MAAM,CAAC;IACb,QAAQ,EAAE,YAAY,CAAC;IACvB,UAAU,EAAE,cAAc,CAAC;CAC9B"}

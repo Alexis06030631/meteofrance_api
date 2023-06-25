@@ -6,3 +6,4 @@ declare const AxiosMessages: {
 };
 export default Messages;
 export { AxiosMessages };
+//# sourceMappingURL=Messages.d.ts.map

@@ -16,5 +16,3 @@ class Place {
     }
 }
 exports.Place = Place;
-class respPlace {
-}

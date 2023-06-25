@@ -1,49 +1,26 @@
+import { Forecast, Properties } from "../models";
+import { API_Nowcast } from "../api_models";
 export declare class Nowcast {
+    /**
+     * The time when the weather was last updated.
+     * @public
+     */
     last_update: Date;
+    /**
+     * The type of weather.
+     * @public
+     */
     type: string;
+    /**
+     * The properties of the city where the weather is being forecasted.
+     * @public
+     * @readonly
+     */
     properties: Properties;
+    /**
+     * The forecast for the next 12 hours.
+     */
     forecast: Forecast[];
-    constructor(response: respWeather);
+    constructor(response: API_Nowcast);
 }
-declare class Forecast {
-    time: Date;
-    rain_intensity: number;
-    rain_intensity_description: string;
-    constructor(e: respForecast);
-}
-declare class Properties {
-    altitude: number;
-    name: string;
-    country: string;
-    department: number;
-    rain_product_available: boolean;
-    timezone: string;
-    confidence: number;
-    constructor(responseElement: respProperties);
-}
-declare class respWeather {
-    update_time: string;
-    type: string;
-    geometry: respGeometry;
-    properties: respProperties;
-}
-declare class respGeometry {
-    type: string;
-    coordinates: Array<number>;
-}
-declare class respProperties {
-    altitude: number;
-    name: string;
-    country: string;
-    french_department: string;
-    rain_product_available: number;
-    timezone: string;
-    confidence: number;
-    forecast: Array<respForecast>;
-}
-declare class respForecast {
-    time: string;
-    rain_intensity: number;
-    rain_intensity_description: string;
-}
-export {};
+//# sourceMappingURL=Nowcast.d.ts.map

@@ -43,8 +43,7 @@ const token_1 = require("./token");
 const errors_1 = require("./errors");
 /**
  * Get config from config.json
- * @param {string} key - Key of config
- * @returns {any} - Value of config
+ * @param key - Key of config
  */
 function getConfig(key) {
     const config = JSON.parse(fs.readFileSync(path_1.default.join(__dirname, "./config.json"), "utf8"));
@@ -57,9 +56,8 @@ function getConfig(key) {
 exports.getConfig = getConfig;
 /**
  * Update config.json with new value
- * @param {string} key - Key of config
- * @param {any} value - New value of config
- * @returns {void}
+ * @param key - Key of config
+ * @param value - New value of config
  */
 function updateConfig(key, value) {
     const config = JSON.parse(fs.readFileSync(path_1.default.join(__dirname, "./config.json"), "utf8"));

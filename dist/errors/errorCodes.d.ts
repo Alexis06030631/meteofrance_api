@@ -13,3 +13,4 @@ declare const _default: {
     ECONNRESET: string;
 };
 export default _default;
+//# sourceMappingURL=errorCodes.d.ts.map

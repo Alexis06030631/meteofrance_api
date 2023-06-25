@@ -1,0 +1,1 @@
+{"version":3,"file":"Weather.d.ts","sourceRoot":"","sources":["../../src/api_models/Weather.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,qBAAqB,EAAE,YAAY,EAAC,MAAM,IAAI,CAAC;AAEvD,qBAAa,WAAW;IACpB,WAAW,EAAE,MAAM,CAAC;IACpB,IAAI,EAAE,MAAM,CAAC;IACb,QAAQ,EAAE,YAAY,CAAC;IACvB,UAAU,EAAE,qBAAqB,CAAC;CACrC"}
