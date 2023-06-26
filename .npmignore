@@ -7,3 +7,7 @@ package-lock.json
 .Ds_Store
 .github
 /src
+docs/
+docs-src/
+api-extractor.json
+vitest.config.ts
