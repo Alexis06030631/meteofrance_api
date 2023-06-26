@@ -1,7 +1,7 @@
 export default {
 	title: 'MeteoFrance_API',
 	description: 'A simple API to get weather data from ®MétéoFrance',
-	base: '/',
+	base: '/meteofrance_api/',
 	outDir: '../docs/',
 	markdown: { attrs: { disable: true } },
 	themeConfig: {
