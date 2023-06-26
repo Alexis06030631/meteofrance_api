@@ -1,5 +1,7 @@
 # MeteoFrance api
 
+### [DOCUMENTATION](https://alexis06030631.github.io/meteofrance_api/)
+
 ## Description
 
 This module allows you to get the weather from the api of meteofrance.
