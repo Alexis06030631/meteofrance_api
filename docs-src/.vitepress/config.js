@@ -7,9 +7,11 @@ export default {
 	themeConfig: {
 		sidebar: [
 			{
-				text: 'Guide',
+				text: 'Functions',
 				items: [
-					{ text: 'Propreties', link: '/api/meteofrance_api.propreties.html' }
+					{ text: 'getNextRain', link: '/api/meteofrance_api.getnextrain.html' },
+					{ text: 'getPlace', link: '/api/meteofrance_api.getplace.html' },
+					{ text: 'getWeather', link: '/api/meteofrance_api.getweather.html' }
 				],
 			},
 		],

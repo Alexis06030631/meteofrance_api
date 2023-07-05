@@ -84,10 +84,11 @@ function makeRequest(url, options, fullUrl) {
         }).catch((err) => {
             var _a, _b, _c;
             if ((_a = err === null || err === void 0 ? void 0 : err.response) === null || _a === void 0 ? void 0 : _a.statusText) {
-                reject((0, errors_1.makeWeatherError)(err.response.statusText.replace(/\s/g, ""), (_c = (_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.message));
+                process.env.dev ? console.log(err === null || err === void 0 ? void 0 : err.response) : null;
+                reject(new errors_1.makeWeatherError(err.response.statusText, (_c = (_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.message));
             }
             else
-                reject((0, errors_1.makeAxiosError)(err.code, err.message));
+                reject(new errors_1.makeWeatherError(err.code, err.message));
         });
     }));
 }
