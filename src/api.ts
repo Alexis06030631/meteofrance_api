@@ -2,9 +2,6 @@ import {Nowcast, Place, Weather} from "./models"
 import {makeRequest} from "./utils";
 import {makeWeatherError} from "./errors";
 
-
-export namespace Propreties {
-
     /**
      * Get next rain from place
      * @param placeName - Place Name or ID (ID is better for performance)
@@ -13,7 +10,7 @@ export namespace Propreties {
     export function getNextRain(placeName: string): Promise<Nowcast> {
         return new Promise<Nowcast>(async (resolve, reject) => {
             const place = (await getPlace(`${placeName}`))?.[0]
-            if(!place?.id) reject(makeWeatherError("PlaceNotFound", placeName));
+            if(!place?.id) return reject(new makeWeatherError("PlaceNotFound", placeName));
 
             makeRequest(`/nowcast/rain?lat=${place.coords.lat}&lon=${place.coords.lon}`).then((res) => {
                 return resolve(new Nowcast(res.data));
@@ -55,13 +52,10 @@ export namespace Propreties {
             const isPlaceId = typeof place === "number"? true: place.match(/^[0-9]+$/) !== null;
             const placeID = isPlaceId? place: (await getPlace(`${place}`))?.[0]?.id;
 
-            if(!placeID) reject(new Error("Place not found"));
+            if(!placeID) return reject(new makeWeatherError("PlaceNotFound", place));
 
             makeRequest(`/forecast?id=${placeID}&day=0`).then((res) => {
                 return resolve(new Weather(res.data));
             })
         })
     }
-
-
-}

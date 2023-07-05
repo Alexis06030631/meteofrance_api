@@ -41,8 +41,9 @@ function makeRequest(url: string, options?: AxiosRequestConfig, fullUrl?: boolea
             resolve(res);
         }).catch((err: any) => {
             if(err?.response?.statusText){
-                reject(makeWeatherError(err.response.statusText.replace(/\s/g, ""), err?.response?.data?.message));
-            }else reject(makeAxiosError(err.code, err.message))
+                process.env.dev? console.log(err?.response):null
+                reject(new makeWeatherError(err.response.statusText, err?.response?.data?.message));
+            }else reject(new makeWeatherError(err.code, err.message))
         })
     })
 }
