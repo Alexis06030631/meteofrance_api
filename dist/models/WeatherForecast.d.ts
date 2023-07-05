@@ -1,10 +1,10 @@
 import { API_WeatherForecast } from "../api_models/";
 export declare class WeatherForecast {
     time: Date;
-    T: number;
-    T_windchill: number;
+    temperature: number;
+    felt_temperature: number;
     relative_humidity: number;
-    P_sea: number;
+    pressure: number;
     wind_icon: string;
     wind_speed: number;
     wind_speed_gust: number;

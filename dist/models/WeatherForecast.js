@@ -5,12 +5,12 @@ const utils_1 = require("../utils");
 class WeatherForecast {
     constructor(e) {
         this.time = new Date(e["time"]);
-        this.T = e["T"];
-        this.T_windchill = e["T_windchill"];
+        this.temperature = e["T"];
+        this.felt_temperature = e["T_windchill"];
         this.relative_humidity = e["relative_humidity"];
-        this.P_sea = e["P_sea"];
+        this.pressure = e["P_sea"];
         this.wind_icon = (0, utils_1.makeIcon)(e["wind_icon"]);
-        this.wind_speed = e["wind_speed"];
+        this.wind_speed = e["wind_speed"] * 5;
         this.wind_speed_gust = e["wind_speed_gust"];
         this.wind_direction = e["wind_direction"];
         this.rain = {

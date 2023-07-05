@@ -3,10 +3,10 @@ import {API_WeatherForecast} from "../api_models/";
 
 export class WeatherForecast {
     time: Date;
-    T: number;
-    T_windchill: number;
+    temperature: number;
+    felt_temperature: number;
     relative_humidity: number;
-    P_sea: number;
+    pressure: number;
     wind_icon: string;
     wind_speed: number;
     wind_speed_gust: number;
@@ -33,12 +33,12 @@ export class WeatherForecast {
 
     constructor(e: API_WeatherForecast) {
         this.time = new Date(e["time"]);
-        this.T = e["T"];
-        this.T_windchill = e["T_windchill"];
+        this.temperature = e["T"];
+        this.felt_temperature = e["T_windchill"];
         this.relative_humidity = e["relative_humidity"];
-        this.P_sea = e["P_sea"];
+        this.pressure = e["P_sea"];
         this.wind_icon = makeIcon(e["wind_icon"]);
-        this.wind_speed = e["wind_speed"];
+        this.wind_speed = e["wind_speed"] * 5;
         this.wind_speed_gust = e["wind_speed_gust"];
         this.wind_direction = e["wind_direction"];
         this.rain = {
