@@ -7,4 +7,5 @@ exports.default = {
     BadRequest: 'BadRequest',
     ECONNRESET: 'ECONNRESET',
     GatewayTimeout: "GatewayTimeout",
+    BadGateway: "BadGateway"
 };
