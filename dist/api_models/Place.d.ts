@@ -1,11 +1,11 @@
 export declare class API_Place {
-    alias: string;
-    id: number;
-    insee: number;
-    type: string;
-    real_name: string;
+    insee: string;
+    name: string;
     lat: number;
-    lng: number;
-    cp: number;
+    lon: number;
+    country: string;
+    admin: string;
+    admin2: string;
+    postCode: string;
 }
 //# sourceMappingURL=Place.d.ts.map

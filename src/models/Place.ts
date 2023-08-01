@@ -1,24 +1,44 @@
 import {API_Place} from "../api_models";
+import {Weather} from "./Weather";
+import {makeRequest} from "../utils";
+import {getNextRain, getWeather} from "../api";
+import {Nowcast} from "./Nowcast";
 
 export class Place {
-    alias: string;
-    id: number;
     insee: number;
-    type: string;
     name: string;
     coords: { lon: number; lat: number };
     cp: number;
+    department_name: string;
+    department_code: string;
+    contry_code: string;
 
     constructor(response: API_Place) {
-        this.alias = response["alias"];
-        this.id = Number(response["id"]);
         this.insee = Number(response["insee"]);
-        this.type = response["type"];
-        this.name = response["real_name"];
+        this.name = response["name"];
         this.coords = {
             lat: Number(response["lat"]),
-            lon: Number(response["lng"])
+            lon: Number(response["lon"])
         }
-        this.cp = Number(response["cp"]);
+        this.department_name = response["admin"];
+        this.department_code = response["admin2"];
+        this.cp = Number(response["postCode"]);
+        this.contry_code = response["country"];
+    }
+
+    async getWeather(): Promise<Weather> {
+        return new Promise<Weather>((resolve, reject) => {
+            getWeather(this).then((weather) => {
+                return resolve(weather);
+            })
+        })
+    }
+
+    async getNextRain(): Promise<Nowcast> {
+        return new Promise<Nowcast>((resolve, reject) => {
+            getNextRain(this).then((nowcast) => {
+                return resolve(nowcast);
+            })
+        })
     }
 }
