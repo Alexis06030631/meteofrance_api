@@ -24,6 +24,9 @@ class Place {
         this.cp = Number(response["postCode"]);
         this.contry_code = response["country"];
     }
+    /**
+     * Get the weather for this place
+     */
     getWeather() {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => {
@@ -33,6 +36,9 @@ class Place {
             });
         });
     }
+    /**
+     * Get the next rain for this place
+     */
     getNextRain() {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => {

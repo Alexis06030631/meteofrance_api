@@ -42,8 +42,6 @@ Use this method to get information about the weather of a place.
 const {getWeather} = require('meteofrance_api')
 
 getWeather('Paris').then(console.log)
-// For better performance use the id instead of the name
-getWeather(751160).then(console.log)
 ```
 
 ### getNextRain

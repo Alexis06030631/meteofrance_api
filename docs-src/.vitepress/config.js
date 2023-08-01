@@ -14,6 +14,14 @@ export default {
 					{ text: 'getWeather', link: '/api/meteofrance_api.getweather.html' }
 				],
 			},
+			{
+				text: 'Models',
+				items: [
+					{ text: 'Place', link: '/api/meteofrance_api.place.html' },
+					{ text: 'Weather', link: '/api/meteofrance_api.weather.html' },
+					{ text: 'Nowcast', link: '/api/meteofrance_api.nowcast.html' }
+				],
+			},
 		],
 		socialLinks: [
 			{

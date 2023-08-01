@@ -1,4 +1,5 @@
 export { Place } from './Place';
+export { Coords } from './coords';
 export { Weather } from './Weather';
 export { Nowcast } from './Nowcast';
 export { Forecast } from './Forecast';

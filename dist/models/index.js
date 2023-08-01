@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WeatherProperties = exports.ProbabilityForecast = exports.DailyForecast = exports.WeatherForecast = exports.Properties = exports.Forecast = exports.Nowcast = exports.Weather = exports.Place = void 0;
+exports.WeatherProperties = exports.ProbabilityForecast = exports.DailyForecast = exports.WeatherForecast = exports.Properties = exports.Forecast = exports.Nowcast = exports.Weather = exports.Coords = exports.Place = void 0;
 var Place_1 = require("./Place");
 Object.defineProperty(exports, "Place", { enumerable: true, get: function () { return Place_1.Place; } });
+var coords_1 = require("./coords");
+Object.defineProperty(exports, "Coords", { enumerable: true, get: function () { return coords_1.Coords; } });
 var Weather_1 = require("./Weather");
 Object.defineProperty(exports, "Weather", { enumerable: true, get: function () { return Weather_1.Weather; } });
 var Nowcast_1 = require("./Nowcast");
