@@ -1,10 +1,10 @@
 import { Nowcast, Place, Weather } from "./models";
 /**
  * Get next rain from place
- * @param placeName - Place Name or ID (ID is better for performance)
+ * @param place - Place Name or Place object
  * @returns A nowcast object
  */
-export declare function getNextRain(placeName: string): Promise<Nowcast>;
+export declare function getNextRain(place: Place | string): Promise<Nowcast>;
 /**
  * Get place from name
  * @param place - Name of place (ex: Paris)
@@ -17,7 +17,7 @@ export declare function getNextRain(placeName: string): Promise<Nowcast>;
 export declare function getPlace(place: string): Promise<Array<Place>>;
 /**
  * Get weather from place
- * @param place - Place Name or ID (ID is better for performance)
+ * @param place - Place Name or Place class
  */
-export declare function getWeather(place: number | string): Promise<Weather>;
+export declare function getWeather(place: Place | string): Promise<Weather>;
 //# sourceMappingURL=api.d.ts.map

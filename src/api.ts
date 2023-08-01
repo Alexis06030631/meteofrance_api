@@ -4,17 +4,21 @@ import {makeWeatherError} from "./errors";
 
     /**
      * Get next rain from place
-     * @param placeName - Place Name or ID (ID is better for performance)
+     * @param place - Place Name or Place object
      * @returns A nowcast object
      */
-    export function getNextRain(placeName: string): Promise<Nowcast> {
+    export function getNextRain(place: Place|string): Promise<Nowcast> {
         return new Promise<Nowcast>(async (resolve, reject) => {
-            const place = (await getPlace(`${placeName}`))?.[0]
-            if(!place?.id) return reject(new makeWeatherError("PlaceNotFound", placeName));
+            const isPlaceClass = place instanceof Place;
+            const placeClass = isPlaceClass? place: (await getPlace(`${place}`))?.[0]
 
-            makeRequest(`/nowcast/rain?lat=${place.coords.lat}&lon=${place.coords.lon}`).then((res) => {
-                return resolve(new Nowcast(res.data));
-            })
+            if(!placeClass?.name) return reject(new makeWeatherError("PlaceNotFound", place));
+
+            if (place instanceof Place) {
+                makeRequest(`/nowcast/rain?lat=${place.coords.lat}&lon=${place.coords.lon}`).then((res) => {
+                    return resolve(new Nowcast(res.data));
+                })
+            }
         })
     }
 
@@ -30,7 +34,7 @@ import {makeWeatherError} from "./errors";
      */
     export function getPlace(place:string): Promise<Array<Place>>{
         return new Promise<Array<Place>>(async (resolve) => {
-            makeRequest(`https://meteofrance.com/search/all?term=${place}`, {}, true).then((res) => {
+            makeRequest(`/places?q=${place}`, {}).then((res) => {
                 const places: Array<Place> = [];
                 res.data.forEach((place: any) => {
                     if(place.type !== "article") {
@@ -45,16 +49,16 @@ import {makeWeatherError} from "./errors";
 
     /**
      * Get weather from place
-     * @param place - Place Name or ID (ID is better for performance)
+     * @param place - Place Name or Place class
      */
-    export function getWeather(place: number | string): Promise<Weather> {
+    export function getWeather(place:Place|string): Promise<Weather> {
         return new Promise<Weather>(async (resolve, reject) => {
-            const isPlaceId = typeof place === "number"? true: place.match(/^[0-9]+$/) !== null;
-            const placeID = isPlaceId? place: (await getPlace(`${place}`))?.[0]?.id;
+            const isPlaceClass = place instanceof Place;
+            const placeClass = isPlaceClass? place: (await getPlace(`${place}`))?.[0]
 
-            if(!placeID) return reject(new makeWeatherError("PlaceNotFound", place));
+            if(!placeClass?.name) return reject(new makeWeatherError("PlaceNotFound", place));
 
-            makeRequest(`/forecast?id=${placeID}&day=0`).then((res) => {
+            makeRequest(`/forecast?lat=${placeClass.coords.lat}&lon=${placeClass.coords.lon}`).then((res) => {
                 return resolve(new Weather(res.data));
             })
         })

@@ -83,6 +83,7 @@ function makeRequest(url, options, fullUrl) {
             resolve(res);
         }).catch((err) => {
             var _a, _b, _c;
+            process.env.dev ? console.log(err) : null;
             if ((_a = err === null || err === void 0 ? void 0 : err.response) === null || _a === void 0 ? void 0 : _a.statusText) {
                 process.env.dev ? console.log(err === null || err === void 0 ? void 0 : err.response) : null;
                 reject(new errors_1.makeWeatherError(err.response.statusText, (_c = (_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.message));

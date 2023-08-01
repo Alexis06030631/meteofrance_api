@@ -15,18 +15,21 @@ const utils_1 = require("./utils");
 const errors_1 = require("./errors");
 /**
  * Get next rain from place
- * @param placeName - Place Name or ID (ID is better for performance)
+ * @param place - Place Name or Place object
  * @returns A nowcast object
  */
-function getNextRain(placeName) {
+function getNextRain(place) {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         var _a;
-        const place = (_a = (yield getPlace(`${placeName}`))) === null || _a === void 0 ? void 0 : _a[0];
-        if (!(place === null || place === void 0 ? void 0 : place.id))
-            return reject(new errors_1.makeWeatherError("PlaceNotFound", placeName));
-        (0, utils_1.makeRequest)(`/nowcast/rain?lat=${place.coords.lat}&lon=${place.coords.lon}`).then((res) => {
-            return resolve(new models_1.Nowcast(res.data));
-        });
+        const isPlaceClass = place instanceof models_1.Place;
+        const placeClass = isPlaceClass ? place : (_a = (yield getPlace(`${place}`))) === null || _a === void 0 ? void 0 : _a[0];
+        if (!(placeClass === null || placeClass === void 0 ? void 0 : placeClass.name))
+            return reject(new errors_1.makeWeatherError("PlaceNotFound", place));
+        if (place instanceof models_1.Place) {
+            (0, utils_1.makeRequest)(`/nowcast/rain?lat=${place.coords.lat}&lon=${place.coords.lon}`).then((res) => {
+                return resolve(new models_1.Nowcast(res.data));
+            });
+        }
     }));
 }
 exports.getNextRain = getNextRain;
@@ -41,7 +44,7 @@ exports.getNextRain = getNextRain;
  */
 function getPlace(place) {
     return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-        (0, utils_1.makeRequest)(`https://meteofrance.com/search/all?term=${place}`, {}, true).then((res) => {
+        (0, utils_1.makeRequest)(`/places?q=${place}`, {}).then((res) => {
             const places = [];
             res.data.forEach((place) => {
                 if (place.type !== "article") {
@@ -55,16 +58,16 @@ function getPlace(place) {
 exports.getPlace = getPlace;
 /**
  * Get weather from place
- * @param place - Place Name or ID (ID is better for performance)
+ * @param place - Place Name or Place class
  */
 function getWeather(place) {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-        var _a, _b;
-        const isPlaceId = typeof place === "number" ? true : place.match(/^[0-9]+$/) !== null;
-        const placeID = isPlaceId ? place : (_b = (_a = (yield getPlace(`${place}`))) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.id;
-        if (!placeID)
+        var _a;
+        const isPlaceClass = place instanceof models_1.Place;
+        const placeClass = isPlaceClass ? place : (_a = (yield getPlace(`${place}`))) === null || _a === void 0 ? void 0 : _a[0];
+        if (!(placeClass === null || placeClass === void 0 ? void 0 : placeClass.name))
             return reject(new errors_1.makeWeatherError("PlaceNotFound", place));
-        (0, utils_1.makeRequest)(`/forecast?id=${placeID}&day=0`).then((res) => {
+        (0, utils_1.makeRequest)(`/forecast?lat=${placeClass.coords.lat}&lon=${placeClass.coords.lon}`).then((res) => {
             return resolve(new models_1.Weather(res.data));
         });
     }));

@@ -40,6 +40,7 @@ function makeRequest(url: string, options?: AxiosRequestConfig, fullUrl?: boolea
         axios.get(encodeURI(`${!fullUrl? getConfig('defaultApi') + `/${url}`: `${url}`}`), options).then((res: any) => {
             resolve(res);
         }).catch((err: any) => {
+            process.env.dev? console.log(err):null
             if(err?.response?.statusText){
                 process.env.dev? console.log(err?.response):null
                 reject(new makeWeatherError(err.response.statusText, err?.response?.data?.message));

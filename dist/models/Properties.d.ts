@@ -3,7 +3,7 @@ export declare class Properties {
     altitude: number;
     name: string;
     country: string;
-    department: number;
+    department_code: string;
     rain_product_available: boolean;
     timezone: string;
     confidence: number;
