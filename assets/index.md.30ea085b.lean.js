@@ -1,0 +1,1 @@
+import{_ as a,o as s,c as e,O as n}from"./chunks/framework.f276d7cf.js";const h=JSON.parse('{"title":"MeteoFrance api","description":"","frontmatter":{},"headers":[],"relativePath":"index.md","filePath":"index.md"}'),o={name:"index.md"},l=n("",21),t=[l];function p(r,c,i,D,y,A){return s(),e("div",null,t)}const F=a(o,[["render",p]]);export{h as __pageData,F as default};
