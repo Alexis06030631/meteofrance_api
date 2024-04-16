@@ -17,7 +17,7 @@ export class Weather {
         this.daily_forecast = response["properties"]["daily_forecast"].map((e) => new DailyForecast(e))[0];
         this.nowcast = response["properties"]["forecast"].filter((e) => new Date(e["time"]).getTime() <= new Date().getTime()).map((e) => new WeatherForecast(e)).pop();
         this.forecast = response["properties"]["forecast"].map((e) => new WeatherForecast(e));
-        this.probability_forecast = response["properties"]["probability_forecast"].map((e) => new ProbabilityForecast(e));
+        this.probability_forecast = response["properties"]["probability_forecast"]?.map((e) => new ProbabilityForecast(e));
         this.last_update = new Date(response["update_time"]);
     }
 }
