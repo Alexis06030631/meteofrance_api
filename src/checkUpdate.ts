@@ -54,4 +54,4 @@ axios.get(url).then((response) => {
 			addColor('\n└'+'─'.repeat(MaxLength+2)+'┘', 'gray')
 		,'DeprecationWarning')
 	}
-})
+}).catch(()=>{})

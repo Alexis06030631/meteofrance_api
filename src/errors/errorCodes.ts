@@ -5,5 +5,6 @@ export default {
     BadRequest: 'BadRequest',
     ECONNRESET: 'ECONNRESET',
     GatewayTimeout: "GatewayTimeout",
-    BadGateway: "BadGateway"
+    BadGateway: "BadGateway",
+    ENOTFOUND: "ENOTFOUND"
 }

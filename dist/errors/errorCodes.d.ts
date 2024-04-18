@@ -6,6 +6,7 @@ declare const _default: {
     ECONNRESET: string;
     GatewayTimeout: string;
     BadGateway: string;
+    ENOTFOUND: string;
 };
 export default _default;
 //# sourceMappingURL=errorCodes.d.ts.map

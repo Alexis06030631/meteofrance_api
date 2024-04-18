@@ -75,4 +75,4 @@ axios_1.default.get(url).then((response) => {
             addColor('\n│ ' + ' '.repeat(MaxLength + 1) + '│', 'gray') +
             addColor('\n└' + '─'.repeat(MaxLength + 2) + '┘', 'gray'), 'DeprecationWarning');
     }
-});
+}).catch(() => { });
